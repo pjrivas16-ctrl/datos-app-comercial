@@ -48,7 +48,11 @@ export const calculateItemPrice = (item: QuoteState): number => {
     // Add prices for all selected extras
     if (extras) {
         extras.forEach(extra => {
-            total += extra.price;
+            // The price for "tapeta-mismo-material" is already included by switching the price list,
+            // so we make sure not to add its own price property if it's not zero.
+            if (extra.id !== 'tapeta-mismo-material') {
+               total += extra.price;
+            }
         });
     }
 
